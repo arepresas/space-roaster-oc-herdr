@@ -58,8 +58,16 @@ LIST_JSON="$(herdr agent list 2>/dev/null)" || {
   exit 2
 }
 
-WORKSPACE="$(printf '%s' "$LIST_JSON" | jq -r '
-  [.result.agents[].workspace_id] | unique[0] // "unknown"')"
+# `herdr agent list` returns agents from every workspace visible to the
+# server, so the roster must be scoped to the current workspace.
+# HERDR_WORKSPACE_ID is set automatically inside Herdr panes.
+if [ -z "${HERDR_WORKSPACE_ID:-}" ]; then
+  echo "HERDR_WORKSPACE_ID not set; cannot scope roster" >&2
+  exit 1
+fi
+
+LIST_JSON="$(printf '%s' "$LIST_JSON" | jq --arg ws "$HERDR_WORKSPACE_ID" '
+  {result: {agents: [.result.agents[] | select(.workspace_id == $ws)]}}')"
 
 CACHE_FILE="/tmp/space-roaster-oc-herdr-${WORKSPACE}.json"
 NOW_EPOCH="$(date +%s)"
