@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# space-roster inventory: enumerate Herdr workspace panes + extract model per pane.
+# space-roaster-oc-herdr inventory: enumerate Herdr workspace panes + extract model per pane.
 #
 # Usage: scripts/inventory.sh [--refresh] [--json]
 #
@@ -12,7 +12,7 @@
 #   1  HERDR_ENV not set, or herdr CLI missing
 #   2  herdr agent list failed
 #
-# Cache: /tmp/space-roster-<workspace>.json (mtime tracked).
+# Cache: /tmp/space-roaster-oc-herdr-<workspace>.json (mtime tracked).
 # Cache TTL: 60s; pass --refresh to bypass.
 
 set -euo pipefail
@@ -61,7 +61,7 @@ LIST_JSON="$(herdr agent list 2>/dev/null)" || {
 WORKSPACE="$(printf '%s' "$LIST_JSON" | jq -r '
   [.result.agents[].workspace_id] | unique[0] // "unknown"')"
 
-CACHE_FILE="/tmp/space-roster-${WORKSPACE}.json"
+CACHE_FILE="/tmp/space-roaster-oc-herdr-${WORKSPACE}.json"
 NOW_EPOCH="$(date +%s)"
 
 # Use cache when fresh.

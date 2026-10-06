@@ -1,5 +1,5 @@
 ---
-name: space-roster
+name: space-roaster-oc-herdr
 description: "Inventory of coding agents and models currently occupying the local Herdr workspace (pane + tab + workspace + agent kind + model + status). Use when HERDR_ENV=1 and the user asks which models, agents, or panes are present in the current space, who is working on what, or wants a roster of the current Herdr session. Also use at session start to load the current roster into context."
 license: MIT
 compatibility: opencode
@@ -37,7 +37,7 @@ The script:
 - Calls `herdr agent list` and parses pane IDs, tabs, workspaces, agent kind, status.
 - For each pane, calls `herdr pane read <pane> --source recent-unwrapped --lines 200`
   to extract the live OpenCode TUI model marker.
-- Caches the result in `/tmp/space-roster-<workspace>.json` with an mtime stamp.
+- Caches the result in `/tmp/space-roaster-oc-herdr-<workspace>.json` with an mtime stamp.
 - If the cache is younger than 60 seconds, returns the cached version.
 - Prints the roster as `pane | tab | agent | model | status` rows.
 
