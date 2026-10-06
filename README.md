@@ -1,4 +1,4 @@
-# space-roster
+# space-roaster-oc-herdr
 
 OpenCode skill that inventories the local [Herdr](https://github.com/) workspace:
 pane + tab + workspace + agent kind + model + status for every coding agent
@@ -14,14 +14,14 @@ is in context before any work begins.
 No official installer - skill files are picked up by file placement.
 
 ```bash
-git clone https://github.com/overlag/space-roster ~/.config/opencode/skills/space-roster
+git clone https://github.com/arepresas/space-roaster-oc-herdr ~/.config/opencode/skills/space-roaster-oc-herdr
 ```
 
 Or, if you keep skills as a worktree:
 
 ```bash
-git clone https://github.com/overlag/space-roster ~/code/space-roster
-ln -s ~/code/space-roster ~/.config/opencode/skills/space-roster
+git clone https://github.com/arepresas/space-roaster-oc-herdr ~/code/space-roaster-oc-herdr
+ln -s ~/code/space-roaster-oc-herdr ~/.config/opencode/skills/space-roaster-oc-herdr
 ```
 
 OpenCode reads `~/.config/opencode/skills/<name>/SKILL.md` at session start
@@ -45,10 +45,10 @@ who is idle?
 list the agents
 ```
 
-The agent will load `space-roster` and run:
+The agent will load `space-roaster-oc-herdr` and run:
 
 ```bash
-~/.config/opencode/skills/space-roster/scripts/inventory.sh
+~/.config/opencode/skills/space-roaster-oc-herdr/scripts/inventory.sh
 ```
 
 Direct CLI usage:
@@ -72,7 +72,7 @@ w5:p3   w5:t3    opencode  GPT-6 Luna GitHub Copilot  idle
 workspace: w5  generated: 2026-10-06T12:34:56Z
 ```
 
-JSON cache at `/tmp/space-roster-<workspace>.json`:
+JSON cache at `/tmp/space-roaster-oc-herdr-<workspace>.json`:
 
 ```json
 {
@@ -105,7 +105,7 @@ JSON cache at `/tmp/space-roster-<workspace>.json`:
 5. Stops at the next `·` to drop duration suffixes like `· 1m 23s`.
 6. Rejects matches containing `<` or backticks to keep script-comment
    placeholders from leaking into the result.
-7. Caches the roster per workspace at `/tmp/space-roster-<workspace>.json`
+7. Caches the roster per workspace at `/tmp/space-roaster-oc-herdr-<workspace>.json`
    for 60 seconds; pass `--refresh` to force a re-read.
 
 ## Limits
@@ -119,11 +119,11 @@ JSON cache at `/tmp/space-roster-<workspace>.json`:
 ## Publishing checklist (when you are ready)
 
 ```bash
-cd ~/Dev/Perso/space-roster
+cd ~/Dev/Perso/space-roaster-oc-herdr
 git init
 git add .
-git commit -m "feat: initial space-roster skill"
-gh repo create overlag/space-roster --public --source=. --remote=origin --push
+git commit -m "feat: initial space-roaster-oc-herdr skill"
+gh repo create arepresas/space-roaster-oc-herdr --public --source=. --remote=origin --push
 ```
 
 ## License
